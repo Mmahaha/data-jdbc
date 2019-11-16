@@ -14,17 +14,17 @@ public class UserController {
     @Autowired
     UserMapper userMapper;
 
-    @GetMapping("/alluser")
+    @GetMapping("/user/alluser")
     public List<User> getalluser(){
         return userMapper.getAllUser();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/inquire/{id}")
     public User getUser(@PathVariable("id") Integer id){
         return userMapper.getUserById(id);
     }
 
-    @GetMapping("/user")
+    @GetMapping("/user/register")
     public User insertUser(User user){
         userMapper.insertUser(user);
         return user;
