@@ -5,12 +5,14 @@ import java.sql.Time;
 public class Task {
     private int taskId;
     private int userId;
+    private String userName;
     private String title;
-    private String decription;
-    private Time postAt;
-    private Time refreshAt;
+    private String description;
+    private String postAt;
+    private String refreshAt;
     private int bounty;
     private int isAccept;
+    private int acceptBy;
 
     public int getTaskId() {
         return taskId;
@@ -28,6 +30,14 @@ public class Task {
         this.userId = userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -36,27 +46,27 @@ public class Task {
         this.title = title;
     }
 
-    public String getDecription() {
-        return decription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDecription(String decription) {
-        this.decription = decription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Time getPostAt() {
+    public String getPostAt() {
         return postAt;
     }
 
-    public void setPostAt(Time postAt) {
+    public void setPostAt(String postAt) {
         this.postAt = postAt;
     }
 
-    public Time getRefreshAt() {
+    public String getRefreshAt() {
         return refreshAt;
     }
 
-    public void setRefreshAt(Time refreshAt) {
+    public void setRefreshAt(String refreshAt) {
         this.refreshAt = refreshAt;
     }
 
@@ -68,11 +78,19 @@ public class Task {
         this.bounty = bounty;
     }
 
-    public int isAccept() {
+    public int getIsAccept() {
         return isAccept;
     }
 
-    public void setAccept(int accept) {
-        isAccept = accept;
+    public void setIsAccept(int isAccept) {
+        this.isAccept = isAccept;
+    }
+
+    public int getAcceptBy() {
+        return acceptBy;
+    }
+
+    public void setAcceptBy(int acceptBy) {
+        this.acceptBy = acceptBy;
     }
 }
