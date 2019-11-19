@@ -51,6 +51,6 @@ spring:
 
 server:
   port: 8080
-#  ssl:
-#    key-store: ssl.pfx
-#    key-store-password: wlzOs8bg
+  ssl:
+    key-store: ssl.pfx
+    key-store-password: wlzOs8bg

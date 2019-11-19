@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.integration.IntegrationProperties;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserController {
@@ -24,8 +26,8 @@ public class UserController {
         return userMapper.getUserById(id);
     }
 
-    @GetMapping("/user/register")
-    public User insertUser(User user){
+    @PostMapping("/user/register")
+    public Object createUser(@RequestBody User user){
         userMapper.insertUser(user);
         return user;
     }
@@ -34,5 +36,15 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Integer id) {
         userMapper.deleteUserById(id);
         return "success";
+    }
+
+    @GetMapping("/user/judge/{openid}")
+    public Object judge(@PathVariable("openid") String openid){
+        Map<String,Object> res = new HashMap<>();
+        if(userMapper.judge(openid)==null)
+            {res.put("status","unexisted");
+            return res;}
+        else
+            return userMapper.judge(openid);
     }
 }

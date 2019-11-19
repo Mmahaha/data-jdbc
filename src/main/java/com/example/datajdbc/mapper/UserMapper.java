@@ -17,9 +17,12 @@ public interface UserMapper {
     public void deleteUserById(Integer id);
 
     @Options(useGeneratedKeys = true, keyProperty = "userId")
-    @Insert("insert into _User(userName,userPsd,userSex) values(#{userName},#{userPsd},#{userSex})")
+    @Insert("insert into _User(userName,userSex,openid,grade,contactType,contactDetail) values(#{userName},#{userSex},#{openid},#{grade},#{contactType},#{contactDetail})")
     public void insertUser(User user);
 
     @Update("update _User set userName=#{userName} where userId=#{id}")
     public void updateUser(User user);
+
+    @Select("select * from _User where openid=#{openid}")
+    public User judge(String openid);
 }

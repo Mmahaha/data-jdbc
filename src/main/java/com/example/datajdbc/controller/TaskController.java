@@ -28,6 +28,14 @@ public class TaskController {
         return taskMapper.getAcceptTask();
     }
 
+    @GetMapping("/task/del/{taskid}")
+    public Map<String,Object> delTask(@PathVariable("taskid") Integer taskid){
+        taskMapper.deleteTask(taskid);
+        Map<String,Object> res = new HashMap<>();
+        res.put("status","success");
+        return res;
+    }
+
     @PostMapping("/task/publish")
     public Map<String,Object> createTask(@RequestBody Task task){
         taskMapper.insertTask(task);
