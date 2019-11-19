@@ -3,6 +3,7 @@ package com.example.datajdbc.controller;
 
 import com.example.datajdbc.bean.Task;
 import com.example.datajdbc.mapper.TaskMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,5 +49,12 @@ public class TaskController {
         ans.put("status","success");
         ans.put("taskId",task.getTaskId());
         return ans;
+    }
+
+    //
+    @PostMapping("/task/updateTitle" )
+    public String updateTitle(@Param("taskId") Integer taskId, @Param("title") String title){
+        taskMapper.updateTitle(taskId, title);
+        return "updateTitleSuccess";
     }
 }

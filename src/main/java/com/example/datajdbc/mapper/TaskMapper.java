@@ -24,7 +24,7 @@ public interface TaskMapper {
     public List<Task> getUnacceptTask();
 
     //标记任务为已接
-    @Update("update task set isAccept = 1 where taskId=#{taskId}")
+    @Update("update task set isAccept=1 ,refreshAt=now() where taskId = #{taskId}")
     public void setAccept(Integer taskId);
 
     //删除任务
@@ -35,4 +35,8 @@ public interface TaskMapper {
     @Options(useGeneratedKeys = true, keyProperty = "taskId")
     @Insert("insert into task(userId,userName,title,description,postAt,bounty) values(#{userId},#{userName},#{title},#{description},now(),#{bounty})")
     public void insertTask(Task task);
+
+    //修改任务标题
+    @Update("update task set title=#{title}, refreshAt=now() where taskId=#{taskId}")
+    public void updateTitle(Integer taskId, String title);
 }
