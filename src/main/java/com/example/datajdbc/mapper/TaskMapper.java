@@ -39,4 +39,25 @@ public interface TaskMapper {
     //修改任务标题
     @Update("update task set title=#{title}, refreshAt=now() where taskId=#{taskId}")
     public void updateTitle(Integer taskId, String title);
+
+    //任务信息修改
+    @Update("update task set description=#{description},refreshAt=now() where taskId=#{taskId}")
+    public void updateDescription(Integer taskId, String description);
+
+    //获取指定用户的所有未接任务
+    @Select("SELECT * FROM task WHERE  task.userId= #{userId} and task.isAccept=0")
+    public List<Task> getUnAcceptedTasksById(Integer userId);
+
+    //获取指定用户的所有已接任务
+    @Select("SELECT * FROM task WHERE  acceptBy=#{userId} and isAccept=1")
+    public List<Task> getAcceptedTasksById(Integer userId);
+
+    //接受任务
+    @Update("UPDATE task SET isAccept=1 ,acceptBy=#{userId}, acceptAt=NOW() WHERE taskId=#{taskId}")
+    public void acceptTask(Integer taskId,Integer userId);
+
+
+    //获取指定用户的所有已发布任务
+    @Select("select * from task where userId=#{userId}")
+    public  List<Task>  getReleasedTasksById(Integer userId);
 }

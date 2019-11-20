@@ -13,6 +13,7 @@ public class Task {
     private int bounty;
     private int isAccept;
     private int acceptBy;
+    private String acceptAt;
 
     public int getTaskId() {
         return taskId;
@@ -92,5 +93,13 @@ public class Task {
 
     public void setAcceptBy(int acceptBy) {
         this.acceptBy = acceptBy;
+    }
+
+    public String getAcceptAt() {
+        return acceptAt;
+    }
+
+    public void setAcceptAt(String acceptAt) {
+        this.acceptAt = acceptAt;
     }
 }

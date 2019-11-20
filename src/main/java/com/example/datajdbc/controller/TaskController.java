@@ -51,10 +51,45 @@ public class TaskController {
         return ans;
     }
 
-    //
-    @PostMapping("/task/updateTitle" )
-    public String updateTitle(@Param("taskId") Integer taskId, @Param("title") String title){
-        taskMapper.updateTitle(taskId, title);
-        return "updateTitleSuccess";
+    //修改任务描述
+    @PostMapping("/task/updateDescription")
+    public String  updateDescription(@Param("taskId") Integer taskId,@Param ("description")String description){
+        taskMapper.updateDescription(taskId,description);
+        return "updateDescriptionSuccess";
     }
+
+    //修改任务标题
+    @PostMapping("/task/updateTitle")
+    public String updateTitle(@Param("taskId") Integer taskId, @Param("title")String title){
+        taskMapper.updateTitle(taskId,title);
+        return "updateTitle Success";
+    }
+
+    //获取指定用户的所有未接任务
+    @GetMapping("/task/getUnacceptedTasksById/{userId}")
+    public  List<Task> getUnacceptedTasksById(@PathVariable ("userId") Integer userId) {
+        List<Task> unAcceptedTasksById = taskMapper.getUnAcceptedTasksById(userId);
+        return unAcceptedTasksById;
+    }
+
+    //获取指定用户的所有已接任务
+    @GetMapping("/task/getAcceptedTasksById/{userId}")
+    public  List<Task> getAcceptedTasksById(@PathVariable ("userId") Integer userId) {
+        List<Task> AcceptedTasksById = taskMapper.getAcceptedTasksById(userId);
+        return AcceptedTasksById;
+    }
+
+    //接受任务
+    @PostMapping("/task/acceptTask")
+    public void acceptTask(@Param("taskId") Integer taskId,@Param("userId") Integer userId){
+        taskMapper.acceptTask(taskId, userId);
+    }
+
+    //获取指定用户的所有已发布任务
+    @GetMapping("/task/getReleasedTasksById/{userId}")
+    public List<Task> getReleasedTasksById(@PathVariable("userId") Integer userId){
+        return taskMapper.getReleasedTasksById(userId);
+    }
+
+
 }
