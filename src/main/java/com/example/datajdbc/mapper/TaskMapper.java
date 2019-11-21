@@ -11,6 +11,10 @@ import java.util.List;
 public interface TaskMapper {
 
 
+    //获取指定任务
+    @Select(("select * from task where taskId=#{taskId}"))
+    public Task getTaskInfo(Integer taskInfo);
+
     //获取所有任务
     @Select("select * from task")
     public List<Task> getAllTask();
@@ -33,7 +37,7 @@ public interface TaskMapper {
 
     //发布任务
     @Options(useGeneratedKeys = true, keyProperty = "taskId")
-    @Insert("insert into task(userId,userName,title,description,postAt,bounty) values(#{userId},#{userName},#{title},#{description},now(),#{bounty})")
+    @Insert("insert into task(userId,userName,title,description,postAt,bounty,tips) values(#{userId},#{userName},#{title},#{description},now(),#{bounty},#{tips})")
     public void insertTask(Task task);
 
     //修改任务标题

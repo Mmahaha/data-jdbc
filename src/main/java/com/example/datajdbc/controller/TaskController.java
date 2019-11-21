@@ -8,15 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 public class TaskController {
     @Autowired
     TaskMapper taskMapper;
+
+    //获取指定任务信息
+    @GetMapping("/task/taskInfo/{taskid}")
+    public Task getTaskInfo(@PathVariable("taskid") Integer taskid){return taskMapper.getTaskInfo(taskid);}
 
     //查看所有未接任务
     @GetMapping("/task/unaccepted")
@@ -36,7 +37,7 @@ public class TaskController {
     @GetMapping("/task/del/{taskid}")
     public Map<String,Object> delTask(@PathVariable("taskid") Integer taskid){
         taskMapper.deleteTask(taskid);
-        Map<String,Object> res = new HashMap<>();
+        Map<String,Object> res = new LinkedHashMap<>();
         res.put("status","success");
         return res;
     }
@@ -45,7 +46,7 @@ public class TaskController {
     @PostMapping("/task/publish")
     public Map<String,Object> createTask(@RequestBody Task task){
         taskMapper.insertTask(task);
-        Map ans = new HashMap();
+        Map ans = new LinkedHashMap();
         ans.put("status","success");
         ans.put("taskId",task.getTaskId());
         return ans;
@@ -53,16 +54,31 @@ public class TaskController {
 
     //修改任务描述
     @PostMapping("/task/updateDescription")
-    public String  updateDescription(@Param("taskId") Integer taskId,@Param ("description")String description){
+    public Object  updateDescription(@Param("taskId") Integer taskId,@Param ("description")String description){
         taskMapper.updateDescription(taskId,description);
-        return "updateDescriptionSuccess";
+        Map<String,Object> res = new LinkedHashMap<>();
+        if(taskMapper.getTaskInfo(taskId).getDescription().equals(description))
+            res.put("status","success");
+        else {
+            res.put("status","error");
+            res.put("error_reason","check your params");
+        }
+        return res;
     }
 
     //修改任务标题
     @PostMapping("/task/updateTitle")
-    public String updateTitle(@Param("taskId") Integer taskId, @Param("title")String title){
+    public Object updateTitle(@Param("taskId") Integer taskId, @Param("title")String title){
         taskMapper.updateTitle(taskId,title);
-        return "updateTitle Success";
+        Map<String,Object> res = new LinkedHashMap<>();
+        if(taskMapper.getTaskInfo(taskId).getTitle().equals(title))
+            res.put("status","success");
+        else{
+            res.put("status","error");
+            res.put("error_reason","check your params");
+        }
+
+        return res;
     }
 
     //获取指定用户的所有未接任务
@@ -81,8 +97,26 @@ public class TaskController {
 
     //接受任务
     @PostMapping("/task/acceptTask")
-    public void acceptTask(@Param("taskId") Integer taskId,@Param("userId") Integer userId){
-        taskMapper.acceptTask(taskId, userId);
+    public Object acceptTask(@Param("taskId") Integer taskId,@Param("userId") Integer userId){
+        Map<String,Object> res = new LinkedHashMap<>();
+        if(taskMapper.getTaskInfo(taskId).getIsAccept()==1){
+            res.put("status","error");
+            res.put("error_reason","Task has been accepted");
+        }
+
+        else{
+            taskMapper.acceptTask(taskId, userId);
+            if(taskMapper.getTaskInfo(taskId).getIsAccept()==1){
+                res.put("status","success");
+            }
+            else{
+                res.put("status","error");
+                res.put("error_reason","unknown");
+            }
+
+        }
+
+        return res;
     }
 
     //获取指定用户的所有已发布任务

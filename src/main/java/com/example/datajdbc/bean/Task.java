@@ -14,6 +14,7 @@ public class Task {
     private int isAccept;
     private int acceptBy;
     private String acceptAt;
+    private String tips;
 
     public int getTaskId() {
         return taskId;
@@ -101,5 +102,13 @@ public class Task {
 
     public void setAcceptAt(String acceptAt) {
         this.acceptAt = acceptAt;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
     }
 }
