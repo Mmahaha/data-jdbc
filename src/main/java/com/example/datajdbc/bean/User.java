@@ -8,6 +8,7 @@ public class User {
     private String grade;
     private String contactType;
     private String contactDetail;
+    private int creditIndex;
 
     public Integer getUserId() {
         return userId;
@@ -63,5 +64,13 @@ public class User {
 
     public void setContactDetail(String contactDetail) {
         this.contactDetail = contactDetail;
+    }
+
+    public int getCreditIndex() {
+        return creditIndex;
+    }
+
+    public void setCreditIndex(int creditIndex) {
+        this.creditIndex = creditIndex;
     }
 }

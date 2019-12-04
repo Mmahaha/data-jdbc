@@ -15,6 +15,11 @@ public class Task {
     private int acceptBy;
     private String acceptAt;
     private String tips;
+    private String category;
+    private int isFinish;
+    private String finishAt;
+    private String expireTime;
+    private int isExpire;
 
     public int getTaskId() {
         return taskId;
@@ -110,5 +115,45 @@ public class Task {
 
     public void setTips(String tips) {
         this.tips = tips;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getIsFinish() {
+        return isFinish;
+    }
+
+    public void setIsFinish(int isFinish) {
+        this.isFinish = isFinish;
+    }
+
+    public String getFinishAt() {
+        return finishAt;
+    }
+
+    public void setFinishAt(String finishAt) {
+        this.finishAt = finishAt;
+    }
+
+    public String getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(String expireTime) {
+        this.expireTime = expireTime;
+    }
+
+    public int getIsExpire() {
+        return isExpire;
+    }
+
+    public void setIsExpire(int isExpire) {
+        this.isExpire = isExpire;
     }
 }

@@ -5,27 +5,36 @@ import com.example.datajdbc.bean.Task;
 import org.apache.ibatis.annotations.*;
 
 
-import java.util.List;
+import java.util.*;
 
 //@Mapper
-public interface TaskMapper {
+public interface TaskMapper{
 
 
-    //获取指定任务
-    @Select(("select * from task where taskId=#{taskId}"))
+    //获取指定任务信息
+    @Select("select * from task where taskId=#{taskId}")
     public Task getTaskInfo(Integer taskInfo);
 
-    //获取所有任务
-    @Select("select * from task")
-    public List<Task> getAllTask();
+    //所有任务
+    @Select("select taskId,userId,userName,category,title,description,tips,bounty,postAt from task order by ${sortBy} ${sort}")
+    public List<LinkedHashMap<String,Object>> getAllTask(@Param("sortBy") String sortBy,@Param("sort") String sort);
+    //所有中筛选任务
+    @Select("select taskId,userId,userName,category,title,description,tips,bounty,postAt from task where category='${category}' order by ${sortBy} ${sort}")
+    public List<LinkedHashMap<String,Object>> getAllTaskCategory(@Param("category") String category, @Param("sortBy") String sortBy,@Param("sort") String sort);
 
-    //获取已接任务
-    @Select("select * from task where isAccept=1")
-    public List<Task> getAcceptTask();
+    //已接的全部任务
+    @Select("select taskId,userId,userName,category,title,description,tips,bounty,postAt from task where isAccept=1 order by ${sortBy} ${sort}")
+    public List<LinkedHashMap<String,Object>> getAcceptTask(@Param("sortBy") String sortBy,@Param("sort") String sort);
+    //已接中筛选任务
+    @Select("select taskId,userId,userName,category,title,description,tips,bounty,postAt from task where isAccept=1 and category='${category}' order by ${sortBy} ${sort}")
+    public List<LinkedHashMap<String,Object>> getAcceptTaskCategory(@Param("category") String category,@Param("sortBy") String sortBy,@Param("sort") String sort);
 
-    //获取未接任务
-    @Select("select * from task where isAccept=0")
-    public List<Task> getUnacceptTask();
+    //可接的全部任务  updated by ysj 2019-12-4
+    @Select("select taskId,userId,userName,category,title,description,tips,bounty,postAt from task where isAccept=0 and (isExpire is NULL or isExpire<>1) order by ${sortBy} ${sort}")
+    public List<LinkedHashMap<String,Object>> getUnacceptedTask(@Param("sortBy") String sortBy,@Param("sort") String sort);
+    //可接中筛选任务
+    @Select("select taskId,userId,userName,category,title,description,tips,bounty,postAt from task where isAccept=0 and category='${category}' and (isExpire is NULL or isExpire<>1) order by ${sortBy} ${sort}")
+    public List<LinkedHashMap<String,Object>> getUnacceptedTaskCategory(@Param("category") String category,@Param("sortBy") String sortBy,@Param("sort") String sort);
 
     //标记任务为已接
     @Update("update task set isAccept=1 ,refreshAt=now() where taskId = #{taskId}")
@@ -37,7 +46,7 @@ public interface TaskMapper {
 
     //发布任务
     @Options(useGeneratedKeys = true, keyProperty = "taskId")
-    @Insert("insert into task(userId,userName,title,description,postAt,bounty,tips) values(#{userId},#{userName},#{title},#{description},now(),#{bounty},#{tips})")
+    @Insert("insert into task(userId,userName,title,description,postAt,bounty,tips,category) values(#{userId},#{userName},#{title},#{description},now(),#{bounty},#{tips},#{category})")
     public void insertTask(Task task);
 
     //修改任务标题
@@ -60,8 +69,9 @@ public interface TaskMapper {
     @Update("UPDATE task SET isAccept=1 ,acceptBy=#{userId}, acceptAt=NOW() WHERE taskId=#{taskId}")
     public void acceptTask(Integer taskId,Integer userId);
 
-
     //获取指定用户的所有已发布任务
     @Select("select * from task where userId=#{userId}")
     public  List<Task>  getReleasedTasksById(Integer userId);
+
+
 }

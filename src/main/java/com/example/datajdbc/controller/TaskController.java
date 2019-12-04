@@ -19,19 +19,31 @@ public class TaskController {
     @GetMapping("/task/taskInfo/{taskid}")
     public Task getTaskInfo(@PathVariable("taskid") Integer taskid){return taskMapper.getTaskInfo(taskid);}
 
-    //查看所有未接任务
-    @GetMapping("/task/unaccepted")
-    public List<Task> getUnacceptTask(){return taskMapper.getUnacceptTask();}
 
-    //查看所有任务
-    @GetMapping("/task/all")
-    public List<Task> getAllTask(){return taskMapper.getAllTask();}
 
-    //查看所有已接任务
-    @GetMapping("/task/accepted")
-    public List<Task> getAcceptTask(){
-        return taskMapper.getAcceptTask();
+    /*
+        ************筛选任务*******************
+        status:三种状态:所有任务all/已接任务accepted/可接任务unaccepted
+        category:具体分类名称
+        sortBy:通过表内什么数据排序 bounty postAt等等
+        sort:升序asc/降序desc
+     */
+    @GetMapping("/task/select")
+    public Object selectTask(@Param("status") String status,@Param("category") String category,@Param("sort") String sort,@Param("sortBy") String sortBy){
+        if(status.equals("all")){
+            if(category.equals("all"))  return taskMapper.getAllTask(sortBy, sort);
+            else    return taskMapper.getAllTaskCategory(category,sortBy,sort);
+        }else if(status.equals("accepted")){
+            if(category.equals("all")) return taskMapper.getAcceptTask(sortBy, sort);
+            else return taskMapper.getAcceptTaskCategory(category,sortBy,sort);
+        }else if(status.equals("unaccepted")){
+            if(category.equals("all"))  return taskMapper.getUnacceptedTask(sortBy, sort);
+            else    return taskMapper.getUnacceptedTaskCategory(category,sortBy,sort);
+        }else{
+            return "unknown command,check your param";
+        }
     }
+
 
     //删除指定任务
     @GetMapping("/task/del/{taskid}")
