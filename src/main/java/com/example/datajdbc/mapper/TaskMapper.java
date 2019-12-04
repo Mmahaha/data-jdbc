@@ -9,12 +9,12 @@ import java.util.*;
 
 //@Mapper
 public interface TaskMapper{
-
-
     //获取指定任务信息
     @Select("select * from task where taskId=#{taskId}")
     public Task getTaskInfo(Integer taskInfo);
 
+
+    //此处为筛选集合
     //所有任务
     @Select("select taskId,userId,userName,category,title,description,tips,bounty,postAt from task order by ${sortBy} ${sort}")
     public List<LinkedHashMap<String,Object>> getAllTask(@Param("sortBy") String sortBy,@Param("sort") String sort);
@@ -35,6 +35,9 @@ public interface TaskMapper{
     //可接中筛选任务
     @Select("select taskId,userId,userName,category,title,description,tips,bounty,postAt from task where isAccept=0 and category='${category}' and (isExpire is NULL or isExpire<>1) order by ${sortBy} ${sort}")
     public List<LinkedHashMap<String,Object>> getUnacceptedTaskCategory(@Param("category") String category,@Param("sortBy") String sortBy,@Param("sort") String sort);
+
+
+
 
     //标记任务为已接
     @Update("update task set isAccept=1 ,refreshAt=now() where taskId = #{taskId}")
