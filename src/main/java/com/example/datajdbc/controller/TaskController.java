@@ -111,14 +111,14 @@ public class TaskController {
     @PostMapping("/task/acceptTask")
     public Object acceptTask(@Param("taskId") Integer taskId,@Param("userId") Integer userId){
         Map<String,Object> res = new LinkedHashMap<>();
-        if(taskMapper.getTaskInfo(taskId).getIsAccept()==1){
+        if(taskMapper.getTaskInfo(taskId).getStatus()==1){
             res.put("status","error");
             res.put("error_reason","Task has been accepted");
         }
 
         else{
             taskMapper.acceptTask(taskId, userId);
-            if(taskMapper.getTaskInfo(taskId).getIsAccept()==1){
+            if(taskMapper.getTaskInfo(taskId).getStatus()==1){
                 res.put("status","success");
             }
             else{

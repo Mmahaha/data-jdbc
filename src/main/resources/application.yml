@@ -1,8 +1,11 @@
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   datasource:
     username: fzutask
     password: task007
-    url: jdbc:mysql://47.102.206.98:3306/fzutask?characterEncoding=UTF-8
+    url: jdbc:mysql://47.102.206.98:3306/fzutask?serverTimezone=GMT%2B8&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -49,8 +52,8 @@ spring:
         enabled: true
 
 
-#server:
-#  port: 8080
-#  ssl:
-#    key-store: ssl.pfx
-#    key-store-password: wlzOs8bg
+server:
+  port: 8080
+  ssl:
+    key-store: ssl.pfx
+    key-store-password: wlzOs8bg

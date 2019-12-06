@@ -11,15 +11,13 @@ public class Task {
     private String postAt;
     private String refreshAt;
     private int bounty;
-    private int isAccept;
+    private int status;
     private int acceptBy;
     private String acceptAt;
     private String tips;
     private String category;
-    private int isFinish;
     private String finishAt;
     private String expireTime;
-    private int isExpire;
 
     public int getTaskId() {
         return taskId;
@@ -85,13 +83,6 @@ public class Task {
         this.bounty = bounty;
     }
 
-    public int getIsAccept() {
-        return isAccept;
-    }
-
-    public void setIsAccept(int isAccept) {
-        this.isAccept = isAccept;
-    }
 
     public int getAcceptBy() {
         return acceptBy;
@@ -125,13 +116,6 @@ public class Task {
         this.category = category;
     }
 
-    public int getIsFinish() {
-        return isFinish;
-    }
-
-    public void setIsFinish(int isFinish) {
-        this.isFinish = isFinish;
-    }
 
     public String getFinishAt() {
         return finishAt;
@@ -149,11 +133,12 @@ public class Task {
         this.expireTime = expireTime;
     }
 
-    public int getIsExpire() {
-        return isExpire;
+    public int getStatus() {
+        return status;
     }
 
-    public void setIsExpire(int isExpire) {
-        this.isExpire = isExpire;
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
+
