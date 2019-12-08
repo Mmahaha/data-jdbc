@@ -20,7 +20,6 @@ public class TaskController {
     public Task getTaskInfo(@PathVariable("taskid") Integer taskid){return taskMapper.getTaskInfo(taskid);}
 
 
-
     /*
         ************筛选任务*******************
         status:三种状态:所有任务all/已接任务accepted/可接任务unaccepted
