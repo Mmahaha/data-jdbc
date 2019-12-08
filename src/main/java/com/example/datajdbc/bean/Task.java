@@ -3,35 +3,35 @@ package com.example.datajdbc.bean;
 import java.sql.Time;
 
 public class Task {
-    private int taskId;
-    private int userId;
+    private Integer taskId;
+    private Integer userId;
     private String userName;
     private String title;
     private String description;
     private String postAt;
     private String refreshAt;
-    private int bounty;
-    private int status;
-    private int acceptBy;
+    private Integer bounty;
+    private Integer status;
+    private Integer acceptBy;
     private String acceptAt;
     private String tips;
     private String category;
     private String finishAt;
     private String expireTime;
 
-    public int getTaskId() {
+    public Integer getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(int taskId) {
+    public void setTaskId(Integer taskId) {
         this.taskId = taskId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -75,20 +75,20 @@ public class Task {
         this.refreshAt = refreshAt;
     }
 
-    public int getBounty() {
+    public Integer getBounty() {
         return bounty;
     }
 
-    public void setBounty(int bounty) {
+    public void setBounty(Integer bounty) {
         this.bounty = bounty;
     }
 
 
-    public int getAcceptBy() {
+    public Integer getAcceptBy() {
         return acceptBy;
     }
 
-    public void setAcceptBy(int acceptBy) {
+    public void setAcceptBy(Integer acceptBy) {
         this.acceptBy = acceptBy;
     }
 
@@ -133,11 +133,11 @@ public class Task {
         this.expireTime = expireTime;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

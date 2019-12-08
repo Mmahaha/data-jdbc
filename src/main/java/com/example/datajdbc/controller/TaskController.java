@@ -111,23 +111,39 @@ public class TaskController {
     @PostMapping("/task/acceptTask")
     public Object acceptTask(@Param("taskId") Integer taskId,@Param("userId") Integer userId){
         Map<String,Object> res = new LinkedHashMap<>();
-        if(taskMapper.getTaskInfo(taskId).getStatus()==1){
+        if(taskMapper.getTaskInfo(taskId).getStatus().equals(1)){
             res.put("status","error");
             res.put("error_reason","Task has been accepted");
         }
 
         else{
             taskMapper.acceptTask(taskId, userId);
-            if(taskMapper.getTaskInfo(taskId).getStatus()==1){
+            if(taskMapper.getTaskInfo(taskId).getUserId().equals(userId)){
+                res.put("status","error");
+                res.put("error_reason","Can't accept your task");
+            }
+            else if(taskMapper.getTaskInfo(taskId).getStatus().equals(1)){
                 res.put("status","success");
             }
             else{
                 res.put("status","error");
-                res.put("error_reason","unknown");
+                res.put("error_reason","unknown status");
             }
 
         }
-
+        return res;
+    }
+    @PostMapping("/task/finishTask")
+    public Object finishTask(@Param("taskId") Integer taskId){
+        Map<String,Object> res = new LinkedHashMap<>();
+        if(taskMapper.getTaskInfo(taskId).getStatus().equals(1)){
+            taskMapper.finishTask(taskId);
+            res.put("status","success");
+        }
+        else{
+            res.put("status","error");
+            res.put("error_reason","Task has been finished or unaccepted");
+        }
         return res;
     }
 

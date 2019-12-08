@@ -70,8 +70,12 @@ public interface TaskMapper{
     public List<Task> getAcceptedTasksById(Integer userId);
 
     //接受任务
-    @Update("UPDATE task SET isAccept=1 ,acceptBy=#{userId}, acceptAt=NOW() WHERE taskId=#{taskId}")
+    @Update("UPDATE task SET status=1 ,acceptBy=#{userId}, acceptAt=NOW() WHERE taskId=#{taskId}")
     public void acceptTask(Integer taskId,Integer userId);
+
+    //完成任务
+    @Update("UPDATE task SET status=2 ,finishAt=NOW() WHERE taskId=#{taskId}")
+    public void finishTask(Integer taskId);
 
     //获取指定用户的所有已发布任务
     @Select("select * from task where userId=#{userId}")
