@@ -51,7 +51,7 @@ spring:
         login-password: task007
         enabled: true
 
-
+#
 #server:
 #  port: 8080
 #  ssl:

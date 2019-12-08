@@ -57,40 +57,30 @@ public class TaskController {
     @PostMapping("/task/publish")
     public Map<String,Object> createTask(@RequestBody Task task){
         taskMapper.insertTask(task);
-        Map ans = new LinkedHashMap();
-        ans.put("status","success");
-        ans.put("taskId",task.getTaskId());
-        return ans;
-    }
-
-    //修改任务描述
-    @PostMapping("/task/updateDescription")
-    public Object  updateDescription(@Param("taskId") Integer taskId,@Param ("description")String description){
-        taskMapper.updateDescription(taskId,description);
-        Map<String,Object> res = new LinkedHashMap<>();
-        if(taskMapper.getTaskInfo(taskId).getDescription().equals(description))
-            res.put("status","success");
-        else {
-            res.put("status","error");
-            res.put("error_reason","check your params");
-        }
+        Map res = new LinkedHashMap();
+        res.put("status","success");
+        res.put("taskId",task.getTaskId());
         return res;
     }
 
-    //修改任务标题
-    @PostMapping("/task/updateTitle")
-    public Object updateTitle(@Param("taskId") Integer taskId, @Param("title")String title){
-        taskMapper.updateTitle(taskId,title);
+    //检查修改权限
+    @GetMapping("task/checkStatus/{taskid}")
+    public Object checkStatus(@PathVariable("taskid") Integer taskid) {
         Map<String,Object> res = new LinkedHashMap<>();
-        if(taskMapper.getTaskInfo(taskId).getTitle().equals(title))
-            res.put("status","success");
-        else{
-            res.put("status","error");
-            res.put("error_reason","check your params");
-        }
-
+        if (taskMapper.getTaskInfo(taskid).getStatus().equals(0)){res.put("authority","enable");}
+        else{res.put("authority","disable");}
         return res;
     }
+
+    //修改任务信息
+    @PostMapping("/task/updateTask")
+    public Object  updateDescription(@RequestBody Task task){
+        Map<String,Object> res = new LinkedHashMap<>();
+        taskMapper.updateTask(task);
+        res.put("status","success");
+        return res;
+    }
+
 
     //获取指定用户的所有未接任务
     @GetMapping("/task/getUnacceptedTasksById/{userId}")
