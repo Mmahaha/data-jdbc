@@ -3,6 +3,7 @@ package com.example.datajdbc.mapper;
 import com.example.datajdbc.bean.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 //@Mapper
@@ -25,4 +26,8 @@ public interface UserMapper {
 
     @Select("select * from _User where openid=#{openid}")
     public User judge(String openid);
+
+    //按信用度排序用户
+    @Select("select userName,creditIndex from _User order by creditIndex desc")
+    public List<LinkedHashMap<String,Object>> userRank();
 }

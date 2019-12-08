@@ -52,4 +52,8 @@ public class UserController {
         else
             return userMapper.judge(openid);
     }
+
+    //按信用度排序用户
+    @GetMapping("/user/rank")
+    public Object userRank(){return userMapper.userRank();}
 }
