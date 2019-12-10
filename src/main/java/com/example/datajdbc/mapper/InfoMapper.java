@@ -12,7 +12,7 @@ public interface InfoMapper {
     修改词条；
      */
 
-    @Options(useGeneratedKeys = true, keyProperty = "infoId")   //能够使自增的taskId返回数值
+    @Options(useGeneratedKeys = true, keyProperty = "infoId")   //能够使自增的infoId返回数值
     @Insert("insert into info(userId,entry,content,creatAt) values(#{userId},#{entry},#{content},now())")
     public void creatInfo(Info info);
 
@@ -41,6 +41,7 @@ public interface InfoMapper {
 
     /*
     Edited by 世杰
-    删除词条 and more..
+    删除词条
+    修改词条权限
      */
 }

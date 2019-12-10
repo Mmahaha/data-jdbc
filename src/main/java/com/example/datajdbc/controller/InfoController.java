@@ -12,12 +12,6 @@ public class InfoController {
     //TODO 前缀统一用 "/info"
 
 
-    /*
-    Edited by 伟欢
-    创建词条；
-    修改词条信息；
-     */
-
     @Autowired
     InfoMapper infoMapper;
 
