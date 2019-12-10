@@ -15,7 +15,7 @@ public class InfoController {
     /*
     Edited by 伟欢
     创建词条；
-    修改词条信息（标题+信息）；
+    修改词条信息；
      */
 
 
