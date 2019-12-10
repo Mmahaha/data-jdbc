@@ -12,7 +12,7 @@ public class InfoController {
     @Autowired
     InfoMapper infoMapper;
     //TODO 前缀统一用 "/info"
-    
+
 
     /*
     Edited by 伟欢
