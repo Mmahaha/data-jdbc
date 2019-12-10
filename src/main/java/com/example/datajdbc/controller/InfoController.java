@@ -58,7 +58,11 @@ public class InfoController {
     展示词条列表(只要显示词条标题和词条id)；
     根据词条id获取具体信息；
      */
+    @GetMapping("/info/select/All")
+    public List<Map>getAllInfo(){return infoMapper.getAllInfo();}
 
+    @GetMapping("/info/select/{infoid}")
+    public Info getInfoById(@PathVariable("infoid") Integer infoid){return infoMapper.getInfoById(infoid);}
 
 
 
