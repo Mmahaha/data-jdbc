@@ -1,6 +1,6 @@
 package com.example.datajdbc.bean;
 
-public class Info {
+public class Info {//123
     private Integer infoId;
     private Integer userId;
     private String entry;
