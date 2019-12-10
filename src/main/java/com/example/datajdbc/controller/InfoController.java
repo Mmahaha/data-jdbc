@@ -41,7 +41,7 @@ public class InfoController {
         return res;
     }
 
-    @PostMapping("/info/all")
+    @GetMapping("/info/all")
     public List<Info>selectAllInfos(){
         return infoMapper.selectAllInfos();
     }
