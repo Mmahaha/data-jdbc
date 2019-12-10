@@ -3,10 +3,8 @@ package com.example.datajdbc.mapper;
 
 import com.example.datajdbc.bean.Task;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.type.JdbcType;
 
 
-import java.net.Inet4Address;
 import java.util.*;
 
 //@Mapper
@@ -50,7 +48,7 @@ public interface TaskMapper{
     public void deleteTask(Integer taskId);
 
     //发布任务
-    @Options(useGeneratedKeys = true, keyProperty = "taskId")
+    @Options(useGeneratedKeys = true, keyProperty = "taskId")   //能够使自增的taskId返回数值
     @Insert("insert into task(userId,userName,title,description,postAt,bounty,tips,category) values(#{userId},#{userName},#{title},#{description},now(),#{bounty},#{tips},#{category})")
     public void insertTask(Task task);
 

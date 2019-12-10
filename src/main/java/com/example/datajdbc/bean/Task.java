@@ -1,6 +1,5 @@
 package com.example.datajdbc.bean;
 
-import java.sql.Time;
 
 public class Task {
     private Integer taskId;

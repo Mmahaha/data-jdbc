@@ -1,0 +1,42 @@
+package com.example.datajdbc.controller;
+
+import com.example.datajdbc.bean.Info;
+import com.example.datajdbc.mapper.InfoMapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+
+@RestController
+public class InfoController {
+    @Autowired
+    InfoMapper infoMapper;
+
+    /*
+    Edited by 伟欢
+    创建词条；
+    修改词条信息（标题+信息）；
+     */
+
+
+
+
+    /*
+    Edited by 小棠
+    展示词条列表(只要显示词条标题和词条id)；
+    根据词条id获取具体信息；
+     */
+
+
+
+
+    /*
+    Edited by 世杰
+    删除词条；
+    修改词条权限；
+     */
+
+
+
+
+}
