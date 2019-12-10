@@ -3,7 +3,7 @@ package com.example.datajdbc.mapper;
 import com.example.datajdbc.bean.Info;
 import org.apache.ibatis.annotations.*;
 
-import java.util.*
+import java.util.*;
 
 public interface InfoMapper {
      /*
