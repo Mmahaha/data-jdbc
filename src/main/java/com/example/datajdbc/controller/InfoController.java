@@ -9,8 +9,6 @@ import java.util.*;
 
 @RestController
 public class InfoController {
-    @Autowired
-    InfoMapper infoMapper;
     //TODO 前缀统一用 "/info"
 
 
@@ -20,7 +18,39 @@ public class InfoController {
     修改词条信息；
      */
 
+    @Autowired
+    InfoMapper infoMapper;
 
+    /*
+    Edited by 伟欢
+    创建词条；
+    修改词条信息；
+     */
+    @PostMapping("/info/creatInfo")
+    public Map<String,Object> creatInfo(@RequestBody Info info){
+        infoMapper.creatInfo(info);
+        Map res = new LinkedHashMap();
+        res.put("status","success");
+        res.put("infoId",info.getInfoId());
+        res.put("userId",info.getUserId());
+//        System.out.println(res);
+        return res;
+    }
+
+
+    //修改词条信息
+    @PostMapping("/info/updateInfo")
+    public Object  updateInfo(@RequestBody Info info){
+        Map<String,Object> res = new LinkedHashMap<>();
+        infoMapper.updateInfo(info);
+        res.put("status","success");
+        return res;
+    }
+
+    @PostMapping("/info/all")
+    public List<Info>selectAllInfos(){
+        return infoMapper.selectAllInfos();
+    }
 
 
     /*

@@ -3,8 +3,7 @@ package com.example.datajdbc.mapper;
 import com.example.datajdbc.bean.Info;
 import org.apache.ibatis.annotations.*;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*
 
 public interface InfoMapper {
      /*
@@ -12,6 +11,16 @@ public interface InfoMapper {
     创建词条；
     修改词条；
      */
+
+    @Options(useGeneratedKeys = true, keyProperty = "infoId")   //能够使自增的taskId返回数值
+    @Insert("insert into info(userId,entry,content,creatAt) values(#{userId},#{entry},#{content},now())")
+    public void creatInfo(Info info);
+
+    @Select("select * from info")
+    public List<Info> selectAllInfos();
+
+    @Update("update info set entry=#{entry},content=#{content},refreshAt=now() where infoId=#{infoId}")
+    public void updateInfo(Info info);
 
 
 
