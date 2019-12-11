@@ -44,4 +44,8 @@ public interface InfoMapper {
     删除词条
     修改词条权限
      */
+
+    @Delete("delete from info where infoId=#{infoId}")
+    public void deleteInfo(Integer infoId);
+
 }

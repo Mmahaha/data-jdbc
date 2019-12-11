@@ -20,13 +20,12 @@ public class InfoController {
     创建词条；
     修改词条信息；
      */
-    @PostMapping("/info/creatInfo")
+    @PostMapping("/info/createInfo")
     public Map<String,Object> creatInfo(@RequestBody Info info){
         infoMapper.creatInfo(info);
         Map res = new LinkedHashMap();
         res.put("status","success");
         res.put("infoId",info.getInfoId());
-        res.put("userId",info.getUserId());
 //        System.out.println(res);
         return res;
     }
@@ -65,6 +64,24 @@ public class InfoController {
     删除词条；
     修改词条权限；
      */
+
+    @GetMapping("/info/delete/{infoid}")
+    public Object deleteInfo(@PathVariable("infoid") Integer infoid) {
+        infoMapper.deleteInfo(infoid);
+        Map<String,Object> res = new LinkedHashMap<>();
+        res.put("status","success");
+        return res;
+    }
+
+    @GetMapping("/info/checkStatus/{infoid}")
+    public Object checkInfo(@Param("infoId") Integer infoId,@Param("userId") Integer userId){
+        Map<String,Object> res = new LinkedHashMap<>();
+        if(infoMapper.getInfoById(infoId).getUserId().equals(userId))
+            res.put("authority","enable");
+        else
+            res.put("authority","disable");
+        return res;
+    }
 
 
 
